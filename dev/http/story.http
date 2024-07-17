@@ -1,0 +1,35 @@
+@hostname = http://localhost:59598
+@storyapi = {{hostname}}/api
+
+###
+POST {{storyapi}}/storages
+accept: application/hal+json
+Content-Type: application/json
+
+{
+  "id": 0,
+  "connectionName": "string",
+  "storageType": "FILE",
+  "comments": "string",
+  "connectionUrl": "string",
+  "connectionUser": "string",
+  "connectionPassword": "string",
+  "connectionProperties": "string",
+  "createdDate": "2024-07-17T04:00:59.122Z",
+  "lastModifiedDate": "2024-07-17T04:00:59.122Z"
+}
+
+###
+GET {{storyapi}}/storages?page=0&size=20
+accept: application/hal+json
+
+###
+GET {{storyapi}}/storages/1
+accept: application/hal+json
+
+###
+GET {{hostname}}/toUpper/test
+accept: application/hal+json
+Content-Type: application/json
+
+
