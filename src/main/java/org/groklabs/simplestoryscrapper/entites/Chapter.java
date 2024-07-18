@@ -45,18 +45,18 @@ public class Chapter {
     @OneToMany(mappedBy = "chapter")
     @Column(name = "unrefined_content")
     @ToString.Exclude
-    @OrderBy("order ASC")
+    @OrderBy("sequence ASC")
     private List<Chunk> unrefinedContent;
 
     @OneToMany(mappedBy = "chapter")
     @Column(name = "refined_content")
-    @OrderBy("order ASC")
+    @OrderBy("sequence ASC")
     @ToString.Exclude
     private List<Chunk> refinedContent;
 
     @OneToMany(mappedBy = "chapter")
     @Column(name = "chapter_summary")
-    @OrderBy("order ASC")
+    @OrderBy("sequence ASC")
     @ToString.Exclude
     private List<Chunk> summaryChunks;
 
