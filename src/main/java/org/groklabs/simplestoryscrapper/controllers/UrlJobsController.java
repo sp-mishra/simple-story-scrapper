@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/urljobs")
+@RequestMapping("/jobs")
 public class UrlJobsController {
 
     private final UrlJobsService urlJobsService;
@@ -18,7 +18,7 @@ public class UrlJobsController {
         this.urlJobsService = urlJobsService;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/addUrl")
     public ResponseEntity<UrlJobsDTO> addUrlJob(@RequestBody String url) {
         final UrlJobsDTO savedDto = urlJobsService.saveUrlJob(url);
         return ResponseEntity.ok(savedDto);

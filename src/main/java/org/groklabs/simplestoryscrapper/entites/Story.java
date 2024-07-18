@@ -54,7 +54,10 @@ public class Story {
     private Storage storage;
 
     @OneToMany(mappedBy = "story", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OrderBy("order ASC")
+    @OrderBy("sequence ASC")
     @ToString.Exclude
     private List<Chapter> chapters;
+
+    @Column(name = "summary_instruction", length = 1000)
+    private String summaryInstruction;
 }
