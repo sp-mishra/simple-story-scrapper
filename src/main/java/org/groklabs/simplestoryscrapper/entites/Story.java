@@ -22,6 +22,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder
@@ -45,7 +46,8 @@ public class Story {
     @Enumerated(EnumType.STRING)
     @Column(length = 50)
     private List<GenreEnum> genre;
-    @OneToOne
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author;
 
@@ -53,11 +55,14 @@ public class Story {
     @JoinColumn(name = "storage_id")
     private Storage storage;
 
-    @OneToMany(mappedBy = "story", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "story", cascade = CascadeType.ALL)
     @OrderBy("sequence ASC")
     @ToString.Exclude
     private List<Chapter> chapters;
 
     @Column(name = "summary_instruction", length = 1000)
     private String summaryInstruction;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 }

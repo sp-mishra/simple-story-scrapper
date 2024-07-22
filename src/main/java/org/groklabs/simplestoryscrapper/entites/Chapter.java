@@ -36,6 +36,8 @@ public class Chapter {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String title;
+
     @Column(name = "sequence", nullable = false, unique = true)
     private Long sequence;
 
@@ -43,22 +45,9 @@ public class Chapter {
     private String parentLocation;
 
     @OneToMany(mappedBy = "chapter")
-    @Column(name = "unrefined_content")
-    @ToString.Exclude
-    @OrderBy("sequence ASC")
-    private List<Chunk> unrefinedContent;
-
-    @OneToMany(mappedBy = "chapter")
-    @Column(name = "refined_content")
     @OrderBy("sequence ASC")
     @ToString.Exclude
-    private List<Chunk> refinedContent;
-
-    @OneToMany(mappedBy = "chapter")
-    @Column(name = "chapter_summary")
-    @OrderBy("sequence ASC")
-    @ToString.Exclude
-    private List<Chunk> summaryChunks;
+    private List<Chunk> chunks;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "story_id")

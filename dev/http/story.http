@@ -32,4 +32,29 @@ GET {{hostname}}/toUpper/test
 accept: application/hal+json
 Content-Type: application/json
 
+###
+POST {{hostname}}/story/addStory
+accept: application/hal+json
+Content-Type: application/json
+
+{
+  "title": "LITTLE SNOW WHITE",
+  "author": "string",
+  "genres": [
+    "FANTASY"
+  ],
+  "url": "string",
+  "text": "string"
+}
+
+###
+POST {{hostname}}/story/addStory
+accept: application/hal+json
+Content-Type: application/json
+
+> {%
+client.test("Request executed successfully", function () {
+client.assert(response.status === 200, "Response status is not 200");
+});
+%}
 
