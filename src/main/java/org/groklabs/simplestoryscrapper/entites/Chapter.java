@@ -8,11 +8,13 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,7 +34,11 @@ import java.util.List;
 @Setter
 @ToString
 @Entity
-@Table(name = "chapter", schema = "public")
+@Table(name = "chapter", schema = "public", indexes = {
+        @Index(name = "idx_chapter_title_unq", columnList = "title, sequence", unique = true)
+}, uniqueConstraints = {
+        @UniqueConstraint(name = "uc_chapter_title_sequence", columnNames = {"title", "sequence"})
+})
 public class Chapter {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
