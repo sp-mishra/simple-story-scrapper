@@ -12,7 +12,6 @@ import org.groklabs.simplestoryscrapper.entites.Story;
 import org.groklabs.simplestoryscrapper.repos.StoryRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,17 +28,19 @@ public class StoryService {
     private final StoryRepository storyRepository;
 
     public String addStory(@Nonnull StoryRecord storyRecord) {
-        final Author author = Author.builder()
-                .firstName(storyRecord.author())
-                .lastName(storyRecord.author())
-                .penName(storyRecord.author())
-                .build();
+        final List<Author> authors = new ArrayList<>(storyRecord.authors().size());
+        storyRecord.authors().forEach(authorRecord -> authors.add(Author.builder()
+                .firstName(authorRecord.firstName())
+                .lastName(authorRecord.lastName())
+                .penName(authorRecord.penName())
+                .build()));
+
         final List<Chapter> chapters = extractChapters(storyRecord);
 
         final Story story = Story.builder()
                 .title(storyRecord.title())
                 .genre(storyRecord.genres())
-                .author(author)
+                .authors(authors)
                 .chapters(chapters)
                 .build();
 

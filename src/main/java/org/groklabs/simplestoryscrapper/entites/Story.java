@@ -12,7 +12,6 @@ import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -47,9 +46,8 @@ public class Story {
     @Column(length = 50)
     private List<GenreEnum> genre;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "author_id")
-    private Author author;
+    @OneToMany(mappedBy = "story", cascade = CascadeType.ALL)
+    private List<Author> authors;
 
     @ManyToOne
     @JoinColumn(name = "storage_id")
